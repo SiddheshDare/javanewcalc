@@ -1,7 +1,7 @@
 ---
 - name: Deploy Scientific Calculator Docker Image
   hosts: localhost
-  remote_user: siddhesh
+  connection: local
   become: false
   tasks:
 
