@@ -1,17 +1,17 @@
-# Use openjdk base image
+# Use openjdk base image (JDK 11)
 FROM openjdk:11-jdk-slim
 
-# Set the working directory
+# Set the working directory inside the container
 WORKDIR /app
 
-# Copy the entire project (including the pom.xml and Java source files) into the container
+# Copy the entire project into the container
 COPY . /app/
 
-# Install Maven
+# Install Maven to build the Java project
 RUN apt-get update && apt-get install -y maven
 
-# Build the Java application using Maven (Assumes pom.xml is present)
+# Build the Java application using Maven
 RUN mvn clean install
 
-# Run the application directly using the JAR file
-CMD ["java", "-jar", "target/calculator-1.0-SNAPSHOT.jar"]
+# Run the application using the generated JAR file
+CMD ["java", "-jar", "target/javacalc-1.0-SNAPSHOT.jar"]
