@@ -13,5 +13,5 @@ RUN apt-get update && apt-get install -y maven
 # Build the Java application using Maven (Assumes pom.xml is present)
 RUN mvn clean install
 
-# Set the default command to run the Java application directly
-CMD ["java", "-cp", "target/classes", "org.example.ScientificCalculator"]
+# Run the application directly using the JAR file
+CMD ["java", "-jar", "target/calculator-1.0-SNAPSHOT.jar"]
