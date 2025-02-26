@@ -1,17 +1,23 @@
+# Use openjdk base image
 FROM openjdk:latest
 
 # Set the working directory
 WORKDIR /app
 
-# Copy the source code into the container
+# Copy the Java source code into the container
 COPY . /app/
 
-# Install Maven to build the Java project
+# Install Maven for building the project
 RUN apt-get update && apt-get install -y maven
 
-# Build the Java application
+# Build the Java application (this assumes you have a pom.xml for Maven)
 RUN mvn clean install
 
-# Set the default command to run the application
-CMD ["java", "-jar", "target/ScientificCalculator.jar"]
+# Copy the calculator.sh script into the container
+COPY calculator.sh /app/calculator.sh
 
+# Ensure the script has execute permissions
+RUN chmod +x /app/calculator.sh
+
+# Set the default command to run the calculator.sh script
+CMD ["./calculator.sh"]
