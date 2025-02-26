@@ -1,5 +1,5 @@
 # Use openjdk base image
-FROM openjdk:latest
+FROM openjdk:11-jdk-slim
 
 # Set the working directory
 WORKDIR /app
@@ -7,7 +7,7 @@ WORKDIR /app
 # Copy the Java source code into the container
 COPY . /app/
 
-# Install Maven for building the project
+# Install Maven
 RUN apt-get update && apt-get install -y maven
 
 # Build the Java application (this assumes you have a pom.xml for Maven)
