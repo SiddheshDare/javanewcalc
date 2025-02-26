@@ -1,0 +1,30 @@
+---
+- name: Deploy Scientific Calculator Docker Image
+  hosts: localhost
+  remote_user: siddhesh
+  become: false
+  tasks:
+
+    - name: Install Docker
+      apt:
+        name: docker.io
+        state: present
+
+    - name: Pull Docker Image
+      docker_image:
+        name: "siddhesh01/scientific-calculator"
+        source: pull
+      register: docker_pull_result
+
+    - name: Display Docker Pull Result
+      debug:
+        var: docker_pull_result
+
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+
+    - name: Run Docker Container
+      shell: docker run -d --name scientific-calculator siddhesh01/scientific-calculator
+
